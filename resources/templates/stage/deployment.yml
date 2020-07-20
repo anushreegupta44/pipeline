@@ -28,6 +28,7 @@ stages:
           - task: AmazonWebServices.aws-vsts-tools.SystemsManagerGetParameter.SystemsManagerGetParameter@1
             displayName: 'Get last successfully pushed image build number'
             inputs:
+              awsCredentials: ${{parameters.AWS_CREDENTIALS}}
               regionName: 'us-east-2'
               parameterName: 'pfm-achievers-pm-build-number'
               singleNameTransform: custom
