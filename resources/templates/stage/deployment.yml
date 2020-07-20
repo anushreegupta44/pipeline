@@ -26,7 +26,6 @@ stages:
           - checkout: self
 
           - task: AmazonWebServices.aws-vsts-tools.SystemsManagerGetParameter.SystemsManagerGetParameter@1
-            condition: eq(variables['BUILD_NUMBER_PROVIDED'], 'false')
             displayName: 'Get last successfully pushed image build number'
             inputs:
               awsCredentials: ${{parameters.AWS_CREDENTIALS}}
