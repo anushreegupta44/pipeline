@@ -33,3 +33,4 @@ stages:
               parameterName: 'pfm-achievers-pm-build-number'
               singleNameTransform: custom
               customVariableName: 'BUILD_NUMBER'
+              roleARN: ${{ parameters.ROLE_ARN }}

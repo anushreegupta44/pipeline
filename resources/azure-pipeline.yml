@@ -10,3 +10,4 @@ stages:
     BUILD_NUMBER: $(BUILD_NUMBER)
     AWS_CREDENTIALS: 'pipeline-1'
     DISPLAY_NAME: 'Dev Deployment'
+    ROLE_ARN: 'arn:aws:iam::781460846167:role/ssmGet'
