@@ -16,6 +16,7 @@ stages:
   jobs:
   - deployment: ${{parameters.ENV_SUFFIX}}_Deployment
     displayName: ${{parameters.DISPLAY_NAME}}
+    environment: 'dev_Deployment'
     strategy:
       runOnce:
         deploy:
