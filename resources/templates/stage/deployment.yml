@@ -1,0 +1,35 @@
+parameters:
+- name: ENV_SUFFIX
+  type: string
+- name: BUILD_NUMBER
+  type: string
+- name: AWS_CREDENTIALS
+  type: string
+- name: DISPLAY_NAME
+  type: string
+
+stages:
+- stage: ${{parameters.ENV_SUFFIX}}_Deployment
+  displayName: ${{parameters.DISPLAY_NAME}}
+  variables:
+    NESTED_STACK_NAME: pfm-achievers-pm-service
+  jobs:
+  - deployment: ${{parameters.ENV_SUFFIX}}_Deployment
+    displayName: ${{parameters.DISPLAY_NAME}}
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: none
+
+          - checkout: self
+
+          - task: AmazonWebServices.aws-vsts-tools.SystemsManagerGetParameter.SystemsManagerGetParameter@1
+            condition: eq(variables['BUILD_NUMBER_PROVIDED'], 'false')
+            displayName: 'Get last successfully pushed image build number'
+            inputs:
+              awsCredentials: ${{parameters.AWS_CREDENTIALS}}
+              regionName: 'us-east-2'
+              parameterName: 'pfm-achievers-pm-build-number'
+              singleNameTransform: custom
+              customVariableName: 'BUILD_NUMBER'
