@@ -7,6 +7,8 @@ parameters:
   type: string
 - name: DISPLAY_NAME
   type: string
+- name: ROLE_ARN
+  type: string
 
 stages:
 - stage: ${{parameters.ENV_SUFFIX}}_Deployment
